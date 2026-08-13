@@ -4,7 +4,6 @@ import { useUiStore } from "@/stores/ui.store";
 
 const baseConfig = {
   baseURL: "http://localhost:5000/api/v1",
-  timeout: 5000,
   withCredentials: true,
 
   headers: {

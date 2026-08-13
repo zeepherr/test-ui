@@ -159,3 +159,25 @@
     @apply font-sans;
   }
 }
+@keyframes global-loading {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(250%);
+  }
+}
+
+.global-loading-indicator {
+  width: 40%;
+  animation: global-loading 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .global-loading-indicator {
+    width: 100%;
+    animation: none;
+    opacity: 0.7;
+  }
+}

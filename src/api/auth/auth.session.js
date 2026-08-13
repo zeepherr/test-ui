@@ -76,7 +76,7 @@ export async function refreshAccessToken() {
     return refreshPromise;
   }
 
-  refreshPromise = await refresh()
+  refreshPromise = refresh()
     .then((payload) => {
       const { accessToken, user } = extractAuthData(payload);
 

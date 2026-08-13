@@ -10,6 +10,7 @@ import { FormField } from "@/components/ui/FormField";
 import { Input } from "@/components/ui/input";
 import { getRoleHome } from "@/constants/role";
 import { AuthLayout } from "@/layouts/auth.layout";
+import { getApiError } from "@/lib/api.error";
 import { loginSchema } from "@/validations/auth.schema";
 import { toast } from "sonner";
 
@@ -48,9 +49,8 @@ export default function LoginPage() {
       });
       toast.success(data.message, { position: "top-center" });
     } catch (error) {
-      // const apiError = getApiError(error, "Unable to login.");
-      // toast.error(error.response?.data.error, { position: "top-right" });
-      setServerError(error.response?.data.error);
+      const apiError = error.apiError ?? getApiError(error);
+      setServerError(apiError.message);
     }
   }
 
@@ -78,7 +78,7 @@ export default function LoginPage() {
             id="identity"
             type="text"
             autoComplete="username"
-            placeholder="name@example.com or 0812345678"
+            placeholder="name@example.com"
             {...register("identity")}
           />
         </FormField>

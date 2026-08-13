@@ -4,6 +4,37 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (() => {
+        const storageKey = "motor-theme";
+        const allowedThemes = ["light", "dark", "system"];
+
+        let theme = "system";
+
+        try {
+          const savedTheme = localStorage.getItem(storageKey);
+
+          if (allowedThemes.includes(savedTheme)) {
+            theme = savedTheme;
+          }
+        } catch {
+          // localStorage မသုံးနိုင်လျှင် system theme ကို အသုံးပြုမည်
+        }
+
+        const resolvedTheme =
+          theme === "system"
+            ? window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light"
+            : theme;
+
+        const root = document.documentElement;
+
+        root.classList.remove("light", "dark");
+        root.classList.add(resolvedTheme);
+        root.style.colorScheme = resolvedTheme;
+      })();
+    </script>
     <title>frontend</title>
   </head>
   <body>

@@ -48,7 +48,7 @@ export function AuthLayout({
             {children}
 
             <p className="mt-6 text-center text-sm text-muted-foreground">
-              {footerText}{" "}
+              {footerText}
               <Link
                 to={footerLinkTo}
                 className="font-medium text-primary hover:underline"

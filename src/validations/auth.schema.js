@@ -18,8 +18,11 @@ export const loginSchema = z.object({
 
 export const registerSchema = z
   .object({
-    identity: identitySchema,
-
+    email: z
+      .string()
+      .trim()
+      .min(1, "Email is required")
+      .email("Enter a valid email address"),
     firstName: z.string().min(3, "First name requires at least 3 characters"),
 
     lastName: z.string().min(3, "Last name requires at least 3 characters"),
@@ -32,3 +35,6 @@ export const registerSchema = z
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+export const verifyEmailSchema = z.object({
+  code: z.string().regex(/^\d{6}$/, "Enter the 6-digit verification code"),
+});

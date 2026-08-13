@@ -17,15 +17,12 @@ export function ThemeProvider({
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
     const applyTheme = () => {
+      const resolvedTheme =
+        theme === "system" ? (mediaQuery.matches ? "dark" : "light") : theme;
+
       root.classList.remove("light", "dark");
-
-      if (theme === "system") {
-        root.classList.add(mediaQuery.matches ? "dark" : "light");
-
-        return;
-      }
-
-      root.classList.add(theme);
+      root.classList.add(resolvedTheme);
+      root.style.colorScheme = resolvedTheme;
     };
 
     applyTheme();
